@@ -2,42 +2,51 @@
     padding: 0;
     margin: 0;
 }
+
 body {
     font-size: 14px;
     font-family: 黑体, serif;
     color: #666;
 }
+
 input {
     border: none;
     cursor: none;
 }
+
 a {
     text-decoration: none;
     color: #666;
 }
 
-.grey {
+.grey {}
 
-}
-.orange {
-
-}
+.orange {}
 
 .flex {
-    display:flex;
+    display: flex;
 }
+
 .around {
     justify-content: space-around;
 }
+
 .between {
     justify-content: space-between;
 }
+
+body {
+    font-family: 'Microsoft YaHei';
+}
+
 .evenly {
     justify-content: space-evenly;
 }
+
 .auto {
     flex: auto;
 }
+
 .column {
     flex-direction: column;
 }
@@ -45,18 +54,19 @@ a {
 .pointer {
     cursor: pointer;
 }
+
 .absolute {
     position: absolute;
 }
+
 .relative {
     position: relative;
 }
+
 .top {
     top: 0;
 }
-.left {
-    left: 0;
-}
+
 .animation {
     transition: all .3s ease;
 }
@@ -64,9 +74,11 @@ a {
 .left {
     text-align: left;
 }
+
 .center {
     text-align: center;
 }
+
 .right {
     text-align: right;
 }

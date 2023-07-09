@@ -1,9 +1,9 @@
-import "./assets/css/main.css";
+
 
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "@/assets/css/main.css";
+import "@/assets/css/base.css";
 import "normalize.css";
 import vuex from "@/vuex";
 import element from "element-plus";
