@@ -1,8 +1,6 @@
 <template>
     <box-header/>
-    <div class="area">
-      <router-view/>
-    </div>
+    <router-view/>
     <box-footer/>
 </template>
 

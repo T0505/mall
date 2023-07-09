@@ -3,7 +3,12 @@
     <div>{{item.cateName}}</div>
 <!--    <bar-menu v-else :array="item.children"/>-->
     <ul class="ul-child-menu grey flex" v-if="item.children">
-      <li v-for="i of item.children" :key="i.pid">
+      <li v-for="i of item.children" :key="i.pid" @click="$router.push({
+        name: 'category',
+        query: {
+          value: item.cateName,
+        },
+      })">
         {{i.cateName}}
         <bar-menu v-if="i.children.length" :array="i.children"/>
       </li>

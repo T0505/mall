@@ -1,38 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="414155d9-c026-4a36-ad49-8398bb04b7f6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vue-shopping/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/.vscode/extensions.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/assets/css/base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/assets/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/assets/css/public.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/assets/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/network/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/router/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/Layout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/cart/Cart.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/footer/Box-footer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/header/Box-header.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/index/Index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/login/Login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/process/Process.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/profile/Profile.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/views/search/Search.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/vuex/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/vuex/getters.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/vuex/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/vuex/modules.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/vuex/mutations.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/src/vuex/state.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-shopping/vite.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/未命名.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/components/public/Box-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/components/public/Box-header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +39,7 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/Users/t/history/vue-mall-buy",
     "list.type.of.created.stylesheet": "CSS",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
