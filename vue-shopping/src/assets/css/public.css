@@ -12,6 +12,11 @@ body {
 input {
     border: none;
     cursor: none;
+    outline: none;
+}
+
+ul {
+    list-style-type: none;
 }
 
 a {
@@ -19,9 +24,30 @@ a {
     color: #666;
 }
 
-.grey {}
+.grey {
+    color: #cccccc;
+}
 
-.orange {}
+.deep-grey {
+    color: gray;
+}
+
+.area {
+    width: 1260px;
+    margin: 0 auto;
+}
+
+.orange {
+    color: #ff7800;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.white {
+    color: white;
+}
 
 .flex {
     display: flex;
@@ -45,6 +71,18 @@ body {
 
 .auto {
     flex: auto;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.auto {
+    flex: auto;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
 
 .column {
@@ -81,4 +119,10 @@ body {
 
 .right {
     text-align: right;
+}
+
+.dot {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

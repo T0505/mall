@@ -21,13 +21,17 @@ instance.interceptors.response.use(
         // 对响应数据做点什么
         // 隐藏加载图
         // 获取code
-        const res = response.data;
+        const r = response.data;
         // 返回成功
-        if (res.status === 200 || res.status === 500 || res.status === 5101) {
+        if (res.status === 200) {
             return res;
         }
         // token 异常
-        if (res.status === 508 || res.status === 512 || res.status === 514) {
+        if (r.status === 200 || res.status === 500 || res.status === 5101) {
+            return r;
+        }
+        // token 异常
+        if (r.status === 508 || r.status === 512 || r.status === 514) {
             // 登出 清除token缓存
         }
         return response;
