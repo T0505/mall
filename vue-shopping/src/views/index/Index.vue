@@ -1,20 +1,22 @@
 <template>
-  <div class="flex">
-    <div class="div-menu-category white" v-if="category">
-      <bar-menu :array="category"/>
+  <div class="area">
+    <div class="flex">
+      <div class="div-menu-category white" v-if="category">
+        <bar-menu :array="category"/>
+      </div>
+      <div>
+        <el-carousel class="carousel-width" height="428px">
+          <el-carousel-item v-for="item in 4" :key="item">
+            <img width="1030" src="../../assets/image/img.png" alt="">
+          </el-carousel-item>
+        </el-carousel>
+      </div>
     </div>
-    <div>
-      <el-carousel class="carousel-width" height="428px">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <img width="1030" src="../../assets/image/img.png" alt="">
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+    <h2 class="bold">精品推荐</h2>
+    <goods :width="80" :array="bast"/>
+    <h2 class="bold">猜你喜欢</h2>
+    <goods :width="80" :array="like"/>
   </div>
-  <h2 class="bold">精品推荐</h2>
-  <goods :width="80" :array="bast"/>
-  <h2 class="bold">猜你喜欢</h2>
-  <goods :width="80" :array="like"/>
 </template>
 
 <script>

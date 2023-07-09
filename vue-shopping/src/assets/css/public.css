@@ -9,10 +9,11 @@ body {
     color: #666;
 }
 
-input {
+input,
+button {
     border: none;
-    cursor: none;
     outline: none;
+    background: none;
 }
 
 ul {
