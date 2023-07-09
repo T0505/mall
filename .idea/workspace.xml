@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="414155d9-c026-4a36-ad49-8398bb04b7f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/vue-shopping/src/components/public/Box-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/components/public/Box-header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-shopping/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/css/public.css" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/assets/css/public.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/category/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/views/category/Category.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

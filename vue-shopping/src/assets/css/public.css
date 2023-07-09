@@ -7,10 +7,10 @@ body {
     font-family: 黑体, serif;
     color: #666;
 }
-input {
+input,button {
     border: none;
-    cursor: none;
     outline: none;
+    background: none;
 }
 ul {
     list-style-type: none;
