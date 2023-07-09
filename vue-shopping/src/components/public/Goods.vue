@@ -1,15 +1,20 @@
 <template>
   <div class="flex center evenly wrap">
-    <ul class="ul-goods-item animation pointer relative top" v-for="(item,index) in array"
-        :style="{width: width / column + '%'}" :key="index">
-      <li><img width="200" :src="$url+item.image" alt=""></li>
-      <li class="bold dot">{{item.keyword}}</li>
+    <ul
+      class="ul-goods-item animation pointer relative top"
+      v-for="(item, index) in array"
+      :style="{ width: width / column + '%' }"
+      :key="index"
+      @click="goDetail(item.id)"
+    >
+      <li><img width="200" :src="$url + item.image" alt="" /></li>
+      <li class="bold dot">{{ item.keyword }}</li>
       <li class="li-price flex evenly relative">
-        <span class="span-online orange bold">{{item.price}}</span>
-        <s class="grey">{{item.otPrice}}</s>
+        <span class="span-online orange bold">{{ item.price }}</span>
+        <s class="grey">{{ item.otPrice }}</s>
       </li>
       <li class="deep-grey">
-        {{item.storeInfo}}
+        {{ item.storeInfo }}
       </li>
     </ul>
   </div>
@@ -28,9 +33,17 @@ export default {
     },
     width: {
       default: 100,
-    }
+    },
   },
-}
+  methods: {
+    goDetail(id) {
+      console.log(id);
+      this.$router.push({
+        name: "detail",
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>

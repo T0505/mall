@@ -14,7 +14,7 @@ const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
-app.config.globalProperties.$url = "http://192.168.157.45:8008/api/";
+app.config.globalProperties.$url = "http://localhost:8008/api/";
 app.config.globalProperties.$ask = axios;
 
 app.use(element);

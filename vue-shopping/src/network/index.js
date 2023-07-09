@@ -23,8 +23,8 @@ instance.interceptors.response.use(
         // 获取code
         const r = response.data;
         // 返回成功
-        if (res.status === 200) {
-            return res;
+        if (r.status === 200) {
+            return r;
         }
         // token 异常
         if (r.status === 200 || res.status === 500 || res.status === 5101) {
