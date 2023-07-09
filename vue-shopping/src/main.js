@@ -1,9 +1,7 @@
-import "./assets/css/main.css";
-
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "@/assets/css/main.css";
+import "@/assets/css/base.css";
 import "normalize.css";
 import vuex from "@/vuex";
 import element from "element-plus";
@@ -16,7 +14,7 @@ const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
-
+app.config.globalProperties.$url = "http://192.168.157.45:8008/api/";
 app.config.globalProperties.$ask = axios;
 
 app.use(element);

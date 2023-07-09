@@ -10,19 +10,34 @@ body {
 input {
     border: none;
     cursor: none;
+    outline: none;
+}
+ul {
+    list-style-type: none;
 }
 a {
     text-decoration: none;
     color: #666;
 }
-
 .grey {
-
+    color: #cccccc;
+}
+.deep-grey {
+    color: gray;
+}
+.area {
+    width: 1260px;
+    margin: 0 auto;
 }
 .orange {
-
+    color: #ff7800;
 }
-
+.bold {
+    font-weight: bold;
+}
+.white {
+    color: white;
+}
 .flex {
     display:flex;
 }
@@ -35,8 +50,14 @@ a {
 .evenly {
     justify-content: space-evenly;
 }
+.grow {
+    flex-grow: 1;
+}
 .auto {
     flex: auto;
+}
+.wrap {
+    flex-wrap: wrap;
 }
 .column {
     flex-direction: column;
@@ -54,9 +75,6 @@ a {
 .top {
     top: 0;
 }
-.left {
-    left: 0;
-}
 .animation {
     transition: all .3s ease;
 }
@@ -69,4 +87,9 @@ a {
 }
 .right {
     text-align: right;
+}
+.dot {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

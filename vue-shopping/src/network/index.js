@@ -3,7 +3,6 @@ import axios from "axios"
 const instance = axios.create({
     baseURL: "/api",
     timeout: 5000,
-    method: "post",
 });
 instance.interceptors.request.use(
     (config) => {
@@ -22,13 +21,13 @@ instance.interceptors.response.use(
         // 对响应数据做点什么
         // 隐藏加载图
         // 获取code
-        const res = response.data;
+        const r = response.data;
         // 返回成功
-        if (res === 200) {
-            return res;
+        if (r.status === 200) {
+            return r;
         }
         // token 异常
-        if (res === 508 || res === 512 || res === 514) {
+        if (r.status === 508 || r.status === 512 || r.status === 514) {
             // 登出 清除token缓存
         }
         return response;

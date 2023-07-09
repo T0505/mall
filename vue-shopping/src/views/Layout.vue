@@ -1,12 +1,14 @@
 <template>
-  <box-header></box-header>
-  <router-view/>
-  <box-footer></box-footer>
+    <box-header/>
+    <div class="area">
+      <router-view/>
+    </div>
+    <box-footer/>
 </template>
 
 <script>
-import boxFooter from "@/views/footer/Box-footer.vue";
-import boxHeader from "@/views/header/Box-header.vue";
+import boxFooter from "@/components/public/Box-footer.vue";
+import boxHeader from "@/components/public/Box-header.vue";
 export default {
   name: "layout",
   components: {
