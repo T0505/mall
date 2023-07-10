@@ -6,7 +6,7 @@
       <li v-for="i of item.children" :key="i.pid" @click="$router.push({
         name: 'category',
         query: {
-          value: item.cateName,
+          value: JSON.stringify(i),
         },
       })">
         {{i.cateName}}

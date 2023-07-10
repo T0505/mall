@@ -4,19 +4,22 @@
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: 'category' }">全部结果</el-breadcrumb-item>
         <el-breadcrumb-item>
-          <span class="orange">{{$route.query.value}}</span>
+          <span class="orange">{{!value?"全部":value.cateName}}</span>
         </el-breadcrumb-item>
       </el-breadcrumb>
       <main>
         <div class="div-category-sort">排序：
-          <span :class="!active?'orange':''">默认</span>
-          <span :style="active === 2 ? {'--top':'#ff7800'} : active === 3 ? {'-bottom':'#ff7800'}:{
+          <span :class="!active?'orange':''" @click="active = 0">默认</span>
+          <span :class="active?'orange':''" :style="active === 1 ? {
+            '--top':'#ff7800','--bottom': '#f0f0f0',
+            } : active === 2 ? {'--bottom':'#ff7800','--top': '#f0f0f0',
+            }:{
             '--top': '#f0f0f0',
             '--bottom': '#f0f0f0',
-          }" class="span-price-sort relative">价格</span>
+          }" class="span-price-sort relative" @click="active = (active === 1? 2: 1)">价格</span>
         </div>
         <div>
-          <h2 v-if="$route.query.value" class="center">{{$route.query.value}}</h2>
+          <h2 v-if="value" class="center">{{value.cateName}}</h2>
         </div>
       </main>
     </div>
@@ -29,6 +32,7 @@ export default {
   data() {
     return {
       active: 0,
+      value: this.$route.query.value && JSON.parse(this.$route.query.value)
     }
   }
 }

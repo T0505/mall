@@ -5,7 +5,12 @@
       v-for="(item, index) in array"
       :style="{ width: width / column + '%' }"
       :key="index"
-      @click="goDetail(item.id)"
+      @click="$router.push({
+        name: 'detail',
+        query: {
+          id: item.id,
+        },
+      })"
     >
       <li><img width="200" :src="$url + item.image" alt="" /></li>
       <li class="bold dot">{{ item.keyword }}</li>
@@ -34,15 +39,7 @@ export default {
     width: {
       default: 100,
     },
-  },
-  methods: {
-    goDetail(id) {
-      console.log(id);
-      this.$router.push({
-        name: "detail",
-      });
-    },
-  },
+  }
 };
 </script>
 
