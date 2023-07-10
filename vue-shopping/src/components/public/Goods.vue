@@ -47,7 +47,7 @@ export default {
 .ul-goods-item {
   line-height: 28px;
   padding: 20px;
-  margin: 10px;
+  margin: 10px 0;
 }
 .ul-goods-item:hover {
   background-color: white;

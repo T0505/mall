@@ -32,7 +32,7 @@ export default {
 .div-footer-box {
   line-height: 32px;
   padding: 20px 0;
-  background-color: #ccc;
+  background-color: #f1f2f5;
 }
  li {
    transition: color .3s ease;
