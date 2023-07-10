@@ -44,7 +44,7 @@
         <span class="orange">{{now.stock}}</span> 件
       </li>
       <li class="li-bottom-function flex">
-        <el-button color="#ff7800" plain>加入购物车</el-button>
+        <el-button color="#ff7800" plain @click="cart">加入购物车</el-button>
         <el-button color="#ff7800">购物</el-button>
         <div class="div-collect center" :style="goods.storeInfo.userCollect?{
             backgroundColor: '#ff7800',
@@ -154,6 +154,7 @@ export default {
       const temp = [];
       this.goods.productAttr.forEach((item,index) => temp.push(item.attrValue[this.array[index]].attr));
       this.now = this.goods.productValue[temp.join(",")] || this.goods.productValue[temp.reverse().join(",")];
+      this.number = 1;
     },
     init() {
       Promise.all([
@@ -203,13 +204,28 @@ export default {
     check(i) {
       this.type = this.point = i;
       this.toggle(1);
+    },
+    cart() {
+      const data = {
+        cartNum: 1,
+        new: 0,
+        productId: this.$route.query.id,
+        uniqueId: this.now.unique,
+      }
+      this.$ask({
+        method: "post",
+        url: "cart/add",
+        data: data,
+      }).then(response => {
+        this.$message.success(response.msg)
+
+      }).catch(error => console.log(error));
     }
   },
   watch: {
     $route(){
       this.init();
       this.toggle(0);
-      console.log(this.count)
     }
   }
 }

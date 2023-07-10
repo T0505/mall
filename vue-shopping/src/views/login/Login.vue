@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import {mapMutations} from "vuex";
 export default {
   name: "Login",
   data() {
@@ -198,10 +199,12 @@ export default {
             } else {
               document.cookie = "expires=" + 1;
             }
-            this.$message.success(res.msg);
-            this.$router.push({ path: "/" });
+            this.$ask.get("userinfo").then(response => {
+              this.$store.commit("setUser",response.data);
+              this.$message.success(res.msg);
+              this.$router.push({ path: "/" });
+            })
           }
-          console.log(res);
         });
       }
     },

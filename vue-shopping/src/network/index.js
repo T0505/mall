@@ -6,6 +6,10 @@ const instance = axios.create({
 });
 instance.interceptors.request.use(
     (config) => {
+        const token = document.cookie;
+        if(token) {
+            config.headers["Authorization"] = "Bearer " + token.substring(token.indexOf("token=") + 6).trim();
+        }
         // 在发送请求之前做些什么
         config.headers["Content-type"] = "application/JSON";
         return config;
@@ -27,7 +31,7 @@ instance.interceptors.response.use(
             return r;
         }
         // token 异常
-        if (r.status === 200 || res.status === 500 || res.status === 5101) {
+        if (r.status === 200 || r.status === 500 || r.status === 5101) {
             return r;
         }
         // token 异常

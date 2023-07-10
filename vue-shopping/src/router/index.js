@@ -14,7 +14,7 @@ const routes = [{
   children: [],
 }];
 
-["index", "cart", "process", "profile", "detail", "category"].forEach(item => {
+["profile","index", "cart", "process", "detail", "category","order","address","wallet"].forEach(item => {
   routes[routes.length - 1].children.push({
     path: item,
     name: item,

@@ -63,7 +63,7 @@ a {
 }
 
 body {
-    font-family: 'Microsoft YaHei';
+    font-family: 'Microsoft YaHei', serif;
 }
 
 .evenly {
@@ -71,7 +71,7 @@ body {
 }
 
 .auto {
-    flex: auto;
+    flex: auto !important;
 }
 
 .grow {
