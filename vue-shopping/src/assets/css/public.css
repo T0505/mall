@@ -130,3 +130,9 @@ body {
 .hidden {
     overflow: hidden;
 }
+.align {
+    align-items: center;
+}
+.content {
+    justify-content: center;
+}

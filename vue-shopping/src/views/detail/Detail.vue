@@ -57,8 +57,68 @@
       </li>
     </ul>
   </div>
-  <div v-html="description">
-
+  <div class="area">
+    <ul class="flex ul-toggle-menu">
+      <li v-for="(item,index) of menu" :key="index" @click="toggle(index)"
+          :style="{background: index === select ?'white':'none'}">
+        {{item}}
+      </li>
+    </ul>
+    <a id="mao"/>
+    <div class="flex div-collect-detail between">
+      <div v-if="select" class="flex column auto">
+        <ul class="flex ul-comment">
+          <li :class="point===index?'active-comment orange':''" v-for="(item,index) of comment" :key="index"
+              @click="check(index)">
+            {{item}}({{count[index]}})
+          </li>
+        </ul>
+        <ul>
+          <li v-for="(item,i) of comments" :key="i" class="flex li-comment-strip">
+            <div class="div-header-image center">
+              <div><img width="60" src="../../assets/image/img_2.png" alt=""></div>
+              <div>{{item.nickname}}</div>
+            </div>
+            <div class="flex column evenly">
+              <div>{{item.comment}}</div>
+              <ul class="flex">
+                <li v-for="(v,o) of item.picturesArr" :key="o">
+                  <img :src="$url.substring(0,$url.length-1) + v" alt="">
+                </li>
+              </ul>
+              <div class="grey">{{item.createTime}}</div>
+            </div>
+          </li>
+        </ul>
+        <a ref="a" href="#mao"/>
+        <el-pagination
+            class="pagination-detail-comment"
+            background
+            layout="prev, pager, next, jumper"
+            :total="count[point] || 1"
+            :default-page-size="5"
+            @current-change="change"
+        />
+      </div>
+      <div v-else v-html="description"/>
+      <div class="div-you-like center auto">
+        <div class="flex align content">
+          <hr/>
+          <div class="div-guess-like bold">猜你喜欢</div>
+          <hr/>
+        </div>
+        <div>Guess you like it</div>
+        <div v-for="item of like" :key="item.id" class="div-like-list" @click="$router.push({
+          name: 'detail',
+          query: {
+            id: item.id,
+          },
+        });">
+          <div><img width="200" :src="$url + item.image" alt="" /></div>
+          <div class="bold dot">{{ item.keyword }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -73,20 +133,20 @@ export default {
       array: [],
       now: null,
       description: null,
+      select: 0,
+      menu: ["宝贝详情","商品评论"],
+      like: null,
+      count: [],
+      point: 0,
+      comment: ["全部","好评","中评","差评"],
+      page: 1,
+      type: 0,
+      comments: null,
     };
   },
   created() {
-    this.$ask.get("product/detail/"+this.$route.query.id).then(response => {
-      this.goods = response.data;
-      this.array = new Array(this.goods.productAttr.length).fill(0).map(() => 0);
-      this.elect(0,0);
-      const string = this.goods.storeInfo.description,index = string.search('src="');
-      this.description = insertStr(string,index + 5,this.$url.substring(0,this.$url.length-1));
-
-    }).catch(error => console.log(error));
-    function insertStr(source, start, string) {
-      return source.slice(0, start) + string + source.slice(start)
-    }
+    this.init();
+    this.toggle(0);
   },
   methods: {
     elect(o,v) {
@@ -94,12 +154,73 @@ export default {
       const temp = [];
       this.goods.productAttr.forEach((item,index) => temp.push(item.attrValue[this.array[index]].attr));
       this.now = this.goods.productValue[temp.join(",")] || this.goods.productValue[temp.reverse().join(",")];
+    },
+    init() {
+      Promise.all([
+        this.$ask.get("/index/like"),
+        this.$ask.get("product/detail/"+this.$route.query.id),
+      ]).then(response => {
+        this.like = response[0].data.slice(0,4);
+        this.goods = response[1].data;
+        this.array = new Array(this.goods.productAttr.length).fill(0).map(() => 0);
+        this.elect(0,0);
+        const string = this.goods.storeInfo.description,index = string.search('src="');
+        this.description = insertStr(string,index + 5,this.$url.substring(0,this.$url.length-1));
+      }).catch(error => console.log(error));
+      function insertStr(source, start, string) {
+        return source.slice(0, start) + string + source.slice(start)
+      }
+    },
+    toggle(index) {
+      this.count = [];
+      this.select = index;
+      const id = this.$route.query.id;
+      if (this.select===1) {
+        Promise.all([
+          this.$ask.get("reply/config/" + id),
+          this.$ask({
+            url: "reply/list/" + id,
+            params: {
+              limit: 5,
+              page: this.page,
+              type: this.type,
+            },
+          }),
+        ]).then(response => {
+          this.count.push(response[0].data.sumCount);
+          this.count.push(response[0].data.goodCount);
+          this.count.push(response[0].data.inCount);
+          this.count.push(response[0].data.poorCount);
+          this.comments = response[1].data;
+        }).catch(error => console.log(error));
+      }
+    },
+    change(i) {
+      this.page = i;
+      this.toggle(1);
+      this.$refs.a.click();
+    },
+    check(i) {
+      this.type = this.point = i;
+      this.toggle(1);
+    }
+  },
+  watch: {
+    $route(){
+      this.init();
+      this.toggle(0);
+      console.log(this.count)
     }
   }
 }
 </script>
 
 <style scoped>
+hr {
+  width: 50px;
+  background-color: #666;
+  height: 1px;
+}
 .li-click-scroll {
   line-height: 30px;
   display:inline-block;
@@ -158,5 +279,68 @@ export default {
 }
 .is-active {
   background-color: #ff7800 !important;
+}
+.ul-toggle-menu {
+  background-color: #f6f6f6;
+  border: thin solid #cfcfcf;
+  line-height: 38px;
+  margin: 30px 0;
+}
+.ul-toggle-menu>li {
+  padding: 0 20px;
+  border-right: thin solid #cfcfcf;
+  cursor: pointer;
+}
+:deep(p>img) {
+  width: 800px !important;
+  padding: 20px 0;
+}
+.div-you-like {
+  line-height: 36px;
+  padding: 20px 60px;
+  margin-left: 80px;
+  border-left: thin solid #cfcfcf;
+  flex: 0;
+}
+.div-guess-like {
+  margin: 0 20px;
+  font-size: 18px;
+}
+.div-like-list {
+  margin: 40px 0;
+  line-height: 1;
+}
+.div-collect-detail {
+  margin-bottom: 50px;
+}
+.ul-comment>li {
+  padding: 0 40px;
+  border-radius: 36px;
+  border: thin solid #cfcfcf;
+  line-height: 36px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.active-comment {
+  border: thin solid #ff7800!important;
+}
+.div-header-image {
+  margin: 20px;
+}
+.li-comment-strip {
+  line-height: 28px;
+  border-bottom:thin solid #cfcfcf;
+  padding: 20px 0;
+}
+.pagination-detail-comment {
+  justify-content: right;
+  margin: 50px 0;
+}
+:deep(.is-active) {
+  background-color: #ff7800!important;
+  color: white !important;
+}
+:deep(.el-pager li):hover {
+  color: #ff7800;
 }
 </style>

@@ -4,7 +4,7 @@
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: 'category' }">全部结果</el-breadcrumb-item>
         <el-breadcrumb-item>
-          <span class="orange">{{value.cateName || $route.query.keyword}}</span>
+          <span class="orange">{{value ? value.cateName : $route.query.keyword}}</span>
         </el-breadcrumb-item>
       </el-breadcrumb>
       <main>
@@ -134,8 +134,9 @@ export default {
   }
   :deep(.is-active) {
     background-color: #ff7800!important;
+    color: white !important;
   }
   :deep(.el-pager li):hover {
-    color: #ff7800 !important;
+    color: #ff7800;
   }
 </style>
