@@ -28,7 +28,7 @@
   </div>
   <div class="area">
     <div class="div-logo flex between">
-      <div class="pointer" @click="$router.push('/')"><img src="../../assets/image/img_1.png" alt=""></div>
+      <div class="pointer" @click="$router.push('/');"><img src="../../assets/image/img_1.png" alt=""></div>
       <div class="flex relative">
         <el-input class="input-search absolute"
             v-model="value"
@@ -36,7 +36,12 @@
             placeholder="请输入搜索商品"
             prefix-icon="Search"
         />
-        <button class="button-search-goods white pointer absolute">搜索</button>
+        <button class="button-search-goods white pointer absolute" @click="$router.push({
+          name: 'category',
+          query: {
+            keyword: value,
+          },
+        });">搜索</button>
       </div>
     </div>
   </div>
@@ -48,7 +53,7 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      value: null,
+      value: undefined,
     };
   },
   props: {
@@ -58,8 +63,8 @@ export default {
     },
     count: {
       default: 0,
-    }
-  }
+    },
+  },
 }
 </script>
 

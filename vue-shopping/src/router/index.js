@@ -11,16 +11,10 @@ const routes = [{
   path: "/layout",
   name: "layout",
   component: _ => import("@/views/Layout.vue"),
-  children: [
-    {
-      path: 'detail',
-      name: 'detail',
-      component: _ => import("@/views/detail/Detail.vue")
-    }
-  ],
+  children: [],
 }];
 
-["index", "cart", "process", "profile", "search", "category"].forEach(item => {
+["index", "cart", "process", "profile", "detail", "category"].forEach(item => {
   routes[routes.length - 1].children.push({
     path: item,
     name: item,

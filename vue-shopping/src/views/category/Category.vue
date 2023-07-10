@@ -4,7 +4,7 @@
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: 'category' }">全部结果</el-breadcrumb-item>
         <el-breadcrumb-item>
-          <span class="orange">{{!value?"全部":value.cateName}}</span>
+          <span class="orange">{{value.cateName || $route.query.keyword}}</span>
         </el-breadcrumb-item>
       </el-breadcrumb>
       <main>
@@ -51,6 +51,7 @@ export default {
   },
   methods: {
     init(order) {
+      const key = this.$route.query.keyword;
       const sort = !order ? undefined : order===1?"asc":"desc", params = {
         limit: this.limit,
         page: this.page,
@@ -58,6 +59,9 @@ export default {
       }
       if(this.value) {
         params.sid = this.value.id;
+      }
+      if(key) {
+        params.keyword = key;
       }
       this.$ask({
         url: "products",
@@ -73,6 +77,14 @@ export default {
       this.init(this.active);
     }
   },
+  watch:{
+    $route(to,form) {
+      if (to.href.search("keyword") !== -1) {
+        this.value = {};
+      }
+      this.init();
+    }
+  }
 }
 </script>
 
