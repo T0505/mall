@@ -12,7 +12,7 @@
           <li>所在地区：{{element.district}}{{element.province}}{{element.city}}</li>
           <li>详细地址：{{element.detail}}</li>
           <li>手机号：{{element.phone}}</li>
-          <li class="li-active-address"></li>
+          <li v-if="element.isDefault" class="absolute li-active-address"/>
           <li class="flex center">
             <div class="auto pointer">
               <el-icon><Delete /></el-icon>删除
@@ -80,9 +80,21 @@ export default {
   border-left: thin solid #cfcfcf;
 }
 .li-active-address {
-  width: 100px;
-  height: 100px;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  height: 48px;
+  background: #ff7800;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  transform: rotate(90deg);
+}
+.li-active-address::after {
   position: absolute;
-  background-color: #ff7800;
+  content: "\2713";
+  bottom: 20px;
+  color: white;
+  font-size: 28px;
+  top: 0;
+  transform: rotate(-90deg);
 }
 </style>

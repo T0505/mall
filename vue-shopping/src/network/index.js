@@ -9,7 +9,8 @@ instance.interceptors.request.use(
         const token = document.cookie;
         if(token) {
             const temp = token.substring(token.indexOf("token=") + 6);
-            config.headers["Authorization"] = "Bearer " + temp.substring(0, temp.indexOf(";")).trim();
+            const index = temp.indexOf(";");
+            config.headers["Authorization"] = "Bearer " + temp.substring(0, index+1?index:temp.length).trim();
         }
         // 在发送请求之前做些什么
         config.headers["Content-type"] = "application/JSON";

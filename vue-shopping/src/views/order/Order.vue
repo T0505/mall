@@ -123,7 +123,7 @@ img {
   align-self:center;
 }
 .ul-goods-content>li {
-  flex: 5%;
+  flex: 15%;
   align-self:center;
 }
 .ul-goods-content>li:first-of-type {
