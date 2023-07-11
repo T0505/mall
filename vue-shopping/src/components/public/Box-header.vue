@@ -38,9 +38,9 @@
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="$router.push('profile')">个人信息</el-dropdown-item>
-                <el-dropdown-item>我的订单</el-dropdown-item>
-                <el-dropdown-item>收货地址</el-dropdown-item>
-                <el-dropdown-item>钱包充值</el-dropdown-item>
+                <el-dropdown-item @click="$router.push('order')">我的订单</el-dropdown-item>
+                <el-dropdown-item @click="$router.push('address')">收货地址</el-dropdown-item>
+                <el-dropdown-item @click="$router.push('wallet')">钱包充值</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
