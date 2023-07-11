@@ -1,0 +1,141 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 14px;
+    font-family: 黑体, serif;
+    color: #666;
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #666;
+}
+
+.grey {
+    color: #cccccc;
+}
+
+.deep-grey {
+    color: gray;
+}
+
+.area {
+    width: 1260px;
+    margin: 0 auto;
+}
+
+.orange {
+    color: #ff7800;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.white {
+    color: white !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.around {
+    justify-content: space-around;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+body {
+    font-family: 'Microsoft YaHei', serif;
+}
+
+.evenly {
+    justify-content: space-evenly;
+}
+
+.auto {
+    flex: auto !important;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.auto {
+    flex: auto;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+.top {
+    top: 0;
+}
+
+.animation {
+    transition: all .3s ease;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.dot {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.hidden {
+    overflow: hidden;
+}
+.align {
+    align-items: center;
+}
+.content {
+    justify-content: center;
+}
+.nowrap {
+    white-space: nowrap;
+}
