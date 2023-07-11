@@ -25,26 +25,33 @@
       </div>
     </div>
   </left-function>
+  <address-dialog title="新增"/>
 </template>
 
 <script>
 import leftFunction from "@/components/common/Left-function.vue";
+import AddressDialog from "@/views/address/Address-dialog.vue";
 export default {
   name: "Address",
   components: {
+    AddressDialog,
     leftFunction,
   },
   data() {
     return {
       group: [],
+      options: [],
     }
   },
   methods: {
     init() {
-      this.$ask.get("address/list").then(response => {
-        this.group = response.data;
-        console.log(this.group);
-      });
+      Promise.all([
+        this.$ask.get("city_list"),
+        this.$ask.get("address/list")
+      ]).then(response => {
+        this.options = response[0].data;
+        this.group = response[1].data;
+      }).catch(error => console.log(error));
     },
   },
   created() {

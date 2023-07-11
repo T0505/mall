@@ -73,8 +73,8 @@ export default {
         url: "order/list",
         params: {
           limit: 5,
-          type: this.type,
-          page: this.index,
+          type: this.index,
+          page: this.page,
         },
       }).then(response => {
         this.content = response.data.content;

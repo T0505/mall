@@ -47,7 +47,7 @@ a {
 }
 
 .white {
-    color: white;
+    color: white !important;
 }
 
 .flex {
