@@ -18,7 +18,7 @@
                     <el-input v-model="desc" :rows="8" resize="none" type="textarea" placeholder="请输入您的评语" />
                 </el-form-item>
                 <el-form-item label="">
-                    <el-upload action="#" list-type="picture-card" :auto-upload="false" :limit="maxFlie" :on-change="up">
+                    <el-upload action="#" list-type="picture-card" :auto-upload="false" :limit="maxFlie" :on-change="up" :on-remove="delFlie">
                         <el-icon>
                             <Plus />
                         </el-icon>
@@ -52,21 +52,23 @@ export default {
     name: 'Evaluate',
     data() {
         return {
-            goodsValue: '',
-            serveValue: '',
+            goodsValue: 0,
+            serveValue: 0,
             desc: '',
             disabled: '',
             maxFlie: 5,
-            pList: []
+            pList: [],
+            prolist: []
         }
     },
-
+    created() {
+    },
     methods: {
-        up(flie, flies) {
+        up(file, files) {
             this.pList = []
-            console.log(flie)
-            console.log(flies)
-            flies.forEach(element => {
+            console.log(file)
+            console.log(files)
+            files.forEach(element => {
                 this.pList.push("/file/" + element.name);
             });
             console.log(this.pList);
@@ -76,12 +78,21 @@ export default {
             console.log(this.serveValue)
             console.log(this.desc)
             const params = {
-                comment: this.desc,
-                pics: this.pList.join(","), 
-                productScore: this.goodsValue,
-                serviceScore: this.serveValue,
-                // unique: "9a22b8302e124a6c8f2fc665458d5280"
+                url: '/order/comment',
+                method: 'POST',
+                data: {
+                    comment: this.desc,
+                    pics: this.pList.join(","),
+                    productScore: this.goodsValue,
+                    serviceScore: this.serveValue,
+                    // unique: "9a22b8302e124a6c8f2fc665458d5280"
+                }
             }
+
+        },
+        delFlie(file,files) {
+            console.log(file);
+            console.log(files);
         }
     }
 }
