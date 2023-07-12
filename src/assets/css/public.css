@@ -85,9 +85,6 @@ body {
 .wrap {
     flex-wrap: wrap;
 }
-.nowrap {
-    white-space: nowrap;
-}
 
 .column {
     flex-direction: column;
@@ -138,4 +135,7 @@ body {
 }
 .content {
     justify-content: center;
+}
+.nowrap {
+    white-space: nowrap;
 }

@@ -42,6 +42,7 @@ export default {
   padding: 0 60px;
   line-height: 48px;
   margin-right: 14px;
+  min-height: 452px;
 }
 .div-active-menu {
   left: 0;

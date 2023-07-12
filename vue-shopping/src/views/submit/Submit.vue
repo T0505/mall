@@ -24,15 +24,15 @@
             <span>数量</span>
             <span>小计</span>
         </div>
-        <div class="goodsDetail flex">
+        <div class="goodsDetail flex" v-for="item in cartList" :key="item.id">
             <div class="product four flex">
-                <img :src="$url + 'file/pic/5393e585-05a4-492d-be20-c548ee14bee9_source.jpg'" width="100">
-                <span>爱国者(aigo) 移动电源</span>
+                <img :src="`${$url}${item.productInfo.image}`" width="100">
+                <span>{{ item.productInfo.storeName }}</span>
             </div>
-            <span>5000ml</span>
-            <span>￥30.00</span>
-            <span>5000ml</span>
-            <span>5000ml</span>
+            <span>{{ item.productInfo.attrInfo.sku }}</span>
+            <span>￥{{ item.productInfo.attrInfo.price }}</span>
+            <span>{{ item.cartNum }}</span>
+            <span>￥{{ item.cartNum * item.productInfo.attrInfo.price }}</span>
         </div>
         <div class="commit">
             <el-input resize="none" v-model="commit" :rows="3" type="textarea" placeholder="如有其他需求，请备注" />
@@ -44,37 +44,10 @@
         </div>
         <div class="payFooter flex column around">
             <span class="black">运费免运费</span>
-            <span class="black">需付款：<b>￥30.00</b></span>
+            <span class="black">需付款：<b>￥{{ money }}</b></span>
             <span class="bt pointer" @click="commitOrder">提交订单</span>
         </div>
     </div>
-    <el-dialog v-model="dialogVisible" title="新建收货地址" width="30%" center>
-        <el-form label-width="120px" class="demo-ruleForm" status-icon>
-            <el-form-item label="所在地址：">
-                <el-input />
-            </el-form-item>
-            <el-form-item label="详细地址：">
-                <el-input />
-            </el-form-item>
-            <el-form-item label="收货人姓名：">
-                <el-input />
-            </el-form-item>
-            <el-form-item label="手机号码：">
-                <el-input  />
-            </el-form-item>
-            <el-form-item>
-                <el-checkbox v-model="checked" label="设置为默认地址" size="large" />
-            </el-form-item>
-        </el-form>
-        <template #footer>
-            <span class="dialog-footer" center>
-                <el-button type="primary" @click="dialogVisible = false" color="#ff7800" style="color: #fff;">
-                    确认
-                </el-button>
-                <el-button @click="dialogVisible = false">取消</el-button>
-            </span>
-        </template>
-    </el-dialog>
 </template>
 
 <script>
@@ -84,7 +57,10 @@ export default {
             orderList: [],
             commit: '',
             dialogVisible: false,
-            checked: ''
+            checked: '',
+            cartList: [],
+            orderObj: {},
+            money: 0
         }
     },
     created() {
@@ -92,7 +68,32 @@ export default {
     },
     methods: {
         commitOrder() {
-            console.log(this.$route.query.cartId)
+            this.$ask({
+                url: "/order/create/" + this.orderObj.orderKey,
+                method: 'POST',
+                data: {
+                    key: this.orderObj.orderKey,
+                    addressId: this.orderObj.addressInfo.id,
+                    couponId: 0,
+                    from: "h5",
+                    mark: "刘昊测试",
+                    useIntegral: 0,
+                    payType: "yue",
+                    shippingType: 1,
+                    pinkId: 0
+                }
+            }).then(r => {
+                if (r.status === 200) {
+                    this.$message.success(r.msg)
+                } else {
+                    this.$message.warning(r.msg);
+                }
+                this.$router.push({
+                    name: 'order'
+                })
+            })
+        },
+        getOrderList() {
             const params = {
                 url: '/order/confirm',
                 method: 'POST',
@@ -101,34 +102,29 @@ export default {
                 }
             }
             this.$ask(params).then(res => {
-                console.log(res)
+                this.cartList = res.data.cartInfo
+                this.orderObj = res.data
+                console.log(this.orderObj)
                 if (res.status === 200) {
-                    this.$ask({
-                        url: "/order/create/" + res.data.orderKey,
-                        method: 'POST',
+                    const paramsMoney = {
+                        url: "/order/computed/" + this.orderObj.orderKey,
+                        method: "POST",
                         data: {
-                            key: res.data.orderKey, 
-                            addressId: res.data.addressInfo.id,
-                            couponId: 0, 
-                            from: "h5", 
-                            mark: "刘昊测试", 
-                            useIntegral: 0, 
+                            addressId: this.orderObj.addressInfo.id,
+                            couponId: null,
                             payType: "yue",
-                            shippingType: 1,
-                            pinkId: 0 
+                            shipping_type: 1,
+                            key: this.orderObj.orderKey
                         }
-                    }).then(r => {
+                    }
+                    this.$ask(paramsMoney).then(r => {  
                         console.log(r)
-                        if(r.status === 200) {
-                            this.$message.success(r.msg)
-                        }else {
-                            this.$message.warning(r.msg);
-                        }
+                        this.money = r.data.result.payPrice;
                     })
+
                 }
             })
-        },
-        getOrderList() {
+
         },
         insertAddress() {
             this.dialogVisible = true;
