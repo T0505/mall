@@ -1,9 +1,9 @@
 <template>
   <left-function :index="1">
     <ul class="flex relative ul-status-switch">
-      <li :class="index - i ? '' : 'orange'" class="pointer" v-for="(element, i) of status" :key="i" @click="status_switch(i)">
-        {{ element }}</li>
-      <li :style="{ left: 20 + index * 82 + 'px' }" class="absolute animation li-active-status" />
+      <li :class="index-i?'':'orange'" class="pointer" v-for="(element,i) of status" :key="i"
+          @click="status_switch(i)">{{element}}</li>
+      <li :style="{left: 20 + index * 82 + 'px'}" class="absolute animation li-active-status"/>
     </ul>
     <ul class="flex center ul-title-nav">
       <li>宝贝</li>
@@ -16,38 +16,36 @@
     </ul>
     <ul>
       <li v-for="item of content" :key="item.id" class="li-item-show">
-        <div>创建时间：{{ item.createTime }} <span class="span-order-id">订单号：{{ item.orderId }}</span></div>
+        <div>创建时间：{{item.createTime}} <span class="span-order-id">订单号：{{item.orderId}}</span></div>
         <div class="flex center div-content-format">
           <div class="div-goods-img">
             <ul v-for="i of item.cartInfo" :key="i.id" class="flex ul-goods-content">
               <li class="flex auto">
-                <div><img width="86" :src="$url + i.productInfo.image" alt=""></div>
+                <div><img width="86" :src="$url+i.productInfo.image" alt=""></div>
                 <div class="flex column between left">
-                  <div>{{ i.productInfo.storeName }}</div>
-                  <div class="grey">{{ i.productInfo.attrInfo.sku }}</div>
+                  <div>{{i.productInfo.storeName}}</div>
+                  <div class="grey">{{i.productInfo.attrInfo.sku}}</div>
                 </div>
               </li>
-              <li>{{ i.productInfo.attrInfo.price }}</li>
-              <li>{{ i.cartNum }}</li>
+              <li>{{i.productInfo.attrInfo.price}}</li>
+              <li>{{i.cartNum}}</li>
             </ul>
           </div>
-          <div>{{ item.realName }}</div>
+          <div>{{item.realName}}</div>
           <div>
-            <div>¥{{ item.totalPrice }}</div>
+            <div>¥{{item.totalPrice}}</div>
             <div>免邮费</div>
           </div>
           <div>
-            <div class="orange">{{ status[item.statusDto.type] }}</div>
+            <div class="orange">{{status[item.statusDto.type]}}</div>
             <div class="pointer">订单详情</div>
           </div>
-
-          <template v-for="(v, i) of events" :key="i">
-            <el-button v-if="v.main && i === index" color="#ff7800" plain
-              @click="v.main.method(item.orderId)">{{ v.main.topic }}</el-button>
-            <div v-if="v.minor && i === index" class="underline pointer" @click="v.minor.method(item.orderId)">{{
-              v.minor.topic }}</div>
-          </template>
-          <!-- <div><el-button color="#ff7800" plain>立刻支付</el-button></div> -->
+          <div>
+            <template v-for="(v,i) of events" :key="i">
+              <el-button v-if="v.main && i===index" color="#ff7800" plain @click="v.main.method ? v.main.method() : method(v.main.data,item.orderId,v.main.uri)">{{v.main.topic}}</el-button>
+              <div v-if="v.minor && i===index" class="underline pointer" @click="v.minor.method ? v.minor.method(item.cartInfo): method(v.minor.data,item.orderId,v.minor.uri)">{{ v.minor.topic }}</div>
+            </template>
+          </div>
         </div>
       </li>
     </ul>
@@ -63,95 +61,56 @@ export default {
   },
   data() {
     return {
-      status: ["待付款", "待发货", "待收货", "待评价", "已完成"],
-      index: 0,
-      page: 1,
-      total: 1,
-      content: [],
+      status: ["待付款","待发货","待收货","待评价","已完成"],
       events: [
         {
           main: {
             topic: "立刻支付",
-            method: (id) => this.$ask({
-              method: "post",
-              url: "order/pay",
-              data: {
-                uni: id,
-                from: "h5",
-                paytype: "yue",
-              },
-            }).then(response => {
-              this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-              }).then(() => {
-                this.$message({
-                  type: 'success',
-                  message: '删除成功!'
-                });
-              }).catch(() => {
-                this.$message({
-                  type: 'info',
-                  message: '已取消删除'
-                });
-              });
-              const is = response.status === 200;
-              this.$message[is ? "success" : "error"](response.msg);
-              is && init();
-            }),
+            data: {
+              from: "h5",
+              paytype:"yue",
+            },
+            uri: "pay"
           },
           minor: {
-            topic: "取消订单",
-            method: (id) => this.$ask({
-              method: "post",
-              url: "order/cancel",
-              data: {
-                id,
-              },
-            }).then(response => {
-              this.$message.success(response.msg);
-              response.status === 200 && this.init();
-            }),
+            topic:"取消订单",
+            uri: "cancel",
           },
         },
         {
           main: {
             topic: "提醒发货",
-            method: () => this.$message.success("已经提醒卖家发货"),
+            method: () =>  this.$message.success("已经提醒卖家发货"),
           },
         },
         {
           main: {
             topic: "确认收货",
-            method() {
-              console.log(1)
-            }
+            uri: "take",
           },
         },
         {
           minor: {
             topic: "评论",
-            method() {
-              console.log(this)
-              // this.$route.push({
-              //   name: 'evaluate',
-              //   query: {
-              //     list: this.content
-              //   }
-              // })
-            }
+            method:info => this.$router.push({
+                name: "evaluate",
+                query: {
+                  info: JSON.stringify(info),
+                },
+              }),
           },
         },
         {
           minor: {
             topic: "删除订单",
-            method() {
-              console.log(1)
-            }
+            uri: "del",
           },
         },
       ],
+      index: 0,
+      page: 1,
+      total: 1,
+      content: [],
     };
   },
   created() {
@@ -175,6 +134,25 @@ export default {
     status_switch(i) {
       this.index = i;
       this.init();
+    },
+    method(value,id,uri,title) {
+      const data = value || {};
+      data.id = data.uni = id;
+      this.$confirm(title||"该操作无法恢复，继续操作吗？", "提示",{
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.$ask({
+          method: "post",
+          url: "order/" + uri,
+          data,
+        }).then(response => {
+          const is = response.status === 200;
+          this.$message[is ? "success":"error"](response.msg);  
+          is && this.init();
+        });
+      }).catch(() => this.$message.info("暂未操作"));
     }
   }
 }
@@ -184,16 +162,13 @@ export default {
 img {
   margin-right: 10px;
 }
-
 .ul-status-switch {
   line-height: 42px;
   border: thin solid #cfcfcf;
 }
-
 .ul-status-switch>li {
   padding: 0 20px;
 }
-
 .li-active-status {
   padding: 0;
   width: 20px;
@@ -202,65 +177,51 @@ img {
   left: 0;
   background-color: #ff7800;
 }
-
 .ul-title-nav {
   background-color: #f1f2f5;
   line-height: 42px;
   margin: 14px 0;
 }
-
 .ul-title-nav>li:first-of-type {
-  flex: 28%;
+  flex:28%;
 }
-
-.ul-title-nav>li,
-.div-content-format>div {
+.ul-title-nav>li,.div-content-format>div{
   flex: 12%;
-  align-self: center;
+  align-self:center;
 }
-
 .ul-goods-content>li {
   flex: 15%;
-  align-self: center;
+  align-self:center;
 }
-
 .ul-goods-content>li:first-of-type {
   justify-content: center;
 }
-
 .ul-goods-content {
   padding: 15px 0;
   border-bottom: thin solid #cfcfcf;
 }
-
 .ul-goods-content:last-of-type {
   border: none;
 }
-
 .span-order-id {
   margin-left: 40px;
 }
-
 .li-item-show {
   border: thin solid #cfcfcf;
   margin-bottom: 14px;
 }
-
 .li-item-show:last-of-type {
   margin: 0;
 }
-
 .li-item-show>div:first-of-type {
   line-height: 42px;
   background-color: #f3f3f3;
   padding: 0 20px;
 }
-
 .div-content-format {
   padding: 5px 0;
 }
-
-.div-goods-img {
+.div-goods-img{
   flex: 54% !important;
-}</style>
-
+}
+</style>

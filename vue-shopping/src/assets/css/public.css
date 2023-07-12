@@ -139,3 +139,6 @@ body {
 .content {
     justify-content: center;
 }
+.underline {
+    text-decoration: underline;
+}
