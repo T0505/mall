@@ -40,7 +40,12 @@
             <div class="orange">{{status[item.statusDto.type]}}</div>
             <div class="pointer">订单详情</div>
           </div>
-          <div><el-button color="#ff7800" plain>立刻支付</el-button></div>
+          <div>
+            <template v-for="(v,i) of events" :key="i">
+              <el-button v-if="v.main && i===index" color="#ff7800" plain @click="v.main.method ? v.main.method() : method(v.main.data,item.orderId,v.main.uri)">{{v.main.topic}}</el-button>
+              <div v-if="v.minor && i===index" class="underline pointer" @click="v.minor.method ? v.minor.method(item.cartInfo): method(v.minor.data,item.orderId,v.minor.uri)">{{ v.minor.topic }}</div>
+            </template>
+          </div>
         </div>
       </li>
     </ul>
@@ -57,6 +62,51 @@ export default {
   data() {
     return {
       status: ["待付款","待发货","待收货","待评价","已完成"],
+      events: [
+        {
+          main: {
+            topic: "立刻支付",
+            data: {
+              from: "h5",
+              paytype:"yue",
+            },
+            uri: "pay"
+          },
+          minor: {
+            topic:"取消订单",
+            uri: "cancel",
+          },
+        },
+        {
+          main: {
+            topic: "提醒发货",
+            method: () =>  this.$message.success("已经提醒卖家发货"),
+          },
+        },
+        {
+          main: {
+            topic: "确认收货",
+            uri: "take",
+          },
+        },
+        {
+          minor: {
+            topic: "评论",
+            method:info => this.$router.push({
+                name: "evaluate",
+                query: {
+                  info: JSON.stringify(info),
+                },
+              }),
+          },
+        },
+        {
+          minor: {
+            topic: "删除订单",
+            uri: "del",
+          },
+        },
+      ],
       index: 0,
       page: 1,
       total: 1,
@@ -84,6 +134,25 @@ export default {
     status_switch(i) {
       this.index = i;
       this.init();
+    },
+    method(value,id,uri,title) {
+      const data = value || {};
+      data.id = data.uni = id;
+      this.$confirm(title||"该操作无法恢复，继续操作吗？", "提示",{
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.$ask({
+          method: "post",
+          url: "order/" + uri,
+          data,
+        }).then(response => {
+          const is = response.status === 200;
+          this.$message[is ? "success":"error"](response.msg);  
+          is && this.init();
+        });
+      }).catch(() => this.$message.info("暂未操作"));
     }
   }
 }
@@ -156,4 +225,3 @@ img {
   flex: 54% !important;
 }
 </style>
-

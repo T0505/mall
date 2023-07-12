@@ -24,23 +24,14 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     (response) => {
-        // 对响应数据做点什么
-        // 隐藏加载图
-        // 获取code
         const r = response.data;
         // 返回成功
-        if (r.status === 200) {
-            return r;
-        }
-        // token 异常
-        if (r.status === 200 || r.status === 500 || r.status === 5101) {
-            return r;
-        }
         // token 异常
         if (r.status === 508 || r.status === 512 || r.status === 514) {
             // 登出 清除token缓存
+            document.cookie = "";
         }
-        return response;
+        return r;
     },
     (error) => {
         // 对响应错误做点什么
