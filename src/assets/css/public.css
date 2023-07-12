@@ -141,3 +141,6 @@ body {
 .nowrap {
     white-space: nowrap;
 }
+.underline {
+    text-decoration: underline;
+}

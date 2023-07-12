@@ -40,7 +40,12 @@
             <div class="orange">{{status[item.statusDto.type]}}</div>
             <div class="pointer">订单详情</div>
           </div>
-          <div><el-button color="#ff7800" plain>立刻支付</el-button></div>
+          <div>
+            <template v-for="(v,i) of events" :key="i">
+              <el-button v-if="v.main && i===index" color="#ff7800" plain @click="v.main.method(item.orderId)">{{v.main.topic}}</el-button>
+              <div v-if="v.minor && i===index" class="underline pointer" @click="v.minor.method(item.orderId)">{{ v.minor.topic }}</div>
+            </template>
+          </div>
         </div>
       </li>
     </ul>
@@ -57,6 +62,84 @@ export default {
   data() {
     return {
       status: ["待付款","待发货","待收货","待评价","已完成"],
+      events: [
+        {
+          main: {
+            topic: "立刻支付",
+            method: (id) => this.$ask({
+                method: "post",
+                url: "order/pay",
+                data: {
+                  uni: id,
+                  from: "h5",
+                  paytype:"yue",
+                },
+              }).then(response => {
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  type: 'warning'
+                }).then(() => {
+                    this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                  });
+                }).catch(() => {
+                  this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                  });          
+                });
+                const is = response.status === 200;
+                this.$message[is ? "success":"error"](response.msg);
+                is && init();
+              }),
+          },
+          minor: {
+            topic:"取消订单",
+            method: (id) => this.$ask({
+                method: "post",
+                url: "order/cancel",
+                data: {
+                  id,
+                },
+              }).then(response => {
+                this.$message.success(response.msg);
+                response.status === 200 && this.init();
+              }),
+          },
+        },
+        {
+          main: {
+            topic: "提醒发货",
+            method: () =>  this.$message.success("已经提醒卖家发货"),
+          },
+        },
+        {
+          main: {
+            topic: "确认收货",
+            method() {
+              console.log(1)
+            }
+          },
+        },
+        {
+          minor: {
+            topic: "评论",
+            method() {
+              console.log(1)
+            }
+          },
+        },
+        {
+          minor: {
+            topic: "删除订单",
+            method() {
+              console.log(1)
+            }
+          },
+        },
+      ],
       index: 0,
       page: 1,
       total: 1,
@@ -156,4 +239,3 @@ img {
   flex: 54% !important;
 }
 </style>
-
