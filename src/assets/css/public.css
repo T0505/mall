@@ -15,7 +15,9 @@ button {
     outline: none;
     background: none;
 }
-
+textarea {
+    resize:none !important;
+}
 ul {
     list-style-type: none;
 }

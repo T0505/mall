@@ -83,7 +83,7 @@
               <div>{{item.comment}}</div>
               <ul class="flex">
                 <li v-for="(v,o) of item.picturesArr" :key="o">
-                  <img :src="$url.substring(0,$url.length-1) + v" alt="">
+                  <img class="img-detail-comment" width="60" :src="$url.substring(0,$url.length-1) + v" alt="">
                 </li>
               </ul>
               <div class="grey">{{item.createTime}}</div>
@@ -358,5 +358,8 @@ hr {
 }
 :deep(.el-pager li):hover {
   color: #ff7800;
+}
+.img-detail-comment {
+  margin-right: 10px;
 }
 </style>
