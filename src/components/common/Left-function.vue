@@ -2,7 +2,10 @@
   <div class="div-box-profile area flex between">
     <ul class="relative">
       <li :class="index===i?'orange':''" class="pointer nowrap" v-for="(v,i) of menu" :key="i"
-          @click="$router.push(menu[i].uri)">
+          @click="$router.push({
+            name: menu[i].uri,
+            query: menu[i].query
+          })">
         {{v.title}}</li>
       <div :style="{top: 14 + index * 48 + 'px'}" class="div-active-menu absolute"/>
     </ul>
@@ -21,8 +24,9 @@ export default {
              {title:"我的订单",uri:"order"},
              {title:"收货地址",uri:"address"},
              {title:"钱包充值",uri:"wallet"},
-             {title:"我的收藏",uri:"collect"},
-             {title:"浏览足迹",uri:"footprint"}],
+             {title:"我的收藏",uri:"collect",query: {title: "收藏",category: "collect"}},
+             {title:"浏览足迹",uri:"collect",query: {title: "足迹",category: "foot"}}
+            ],
     };
   },
   props: {
