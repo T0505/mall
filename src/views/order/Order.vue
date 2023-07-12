@@ -42,8 +42,8 @@
           </div>
           <div>
             <template v-for="(v,i) of events" :key="i">
-              <el-button v-if="v.main && i===index" color="#ff7800" plain @click="v.main.method(item.orderId)">{{v.main.topic}}</el-button>
-              <div v-if="v.minor && i===index" class="underline pointer" @click="v.minor.method(item.orderId)">{{ v.minor.topic }}</div>
+              <el-button v-if="v.main && i===index" color="#ff7800" plain @click="v.main.method ? v.main.method() : method(v.main.data,item.orderId,v.main.uri)">{{v.main.topic}}</el-button>
+              <div v-if="v.minor && i===index" class="underline pointer" @click="v.minor.method ? v.minor.method(item.cartInfo): method(v.minor.data,item.orderId,v.minor.uri)">{{ v.minor.topic }}</div>
             </template>
           </div>
         </div>
@@ -66,47 +66,15 @@ export default {
         {
           main: {
             topic: "立刻支付",
-            method: (id) => this.$ask({
-                method: "post",
-                url: "order/pay",
-                data: {
-                  uni: id,
-                  from: "h5",
-                  paytype:"yue",
-                },
-              }).then(response => {
-                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-                  confirmButtonText: '确定',
-                  cancelButtonText: '取消',
-                  type: 'warning'
-                }).then(() => {
-                    this.$message({
-                    type: 'success',
-                    message: '删除成功!'
-                  });
-                }).catch(() => {
-                  this.$message({
-                    type: 'info',
-                    message: '已取消删除'
-                  });          
-                });
-                const is = response.status === 200;
-                this.$message[is ? "success":"error"](response.msg);
-                is && init();
-              }),
+            data: {
+              from: "h5",
+              paytype:"yue",
+            },
+            uri: "pay"
           },
           minor: {
             topic:"取消订单",
-            method: (id) => this.$ask({
-                method: "post",
-                url: "order/cancel",
-                data: {
-                  id,
-                },
-              }).then(response => {
-                this.$message.success(response.msg);
-                response.status === 200 && this.init();
-              }),
+            uri: "cancel",
           },
         },
         {
@@ -118,25 +86,24 @@ export default {
         {
           main: {
             topic: "确认收货",
-            method() {
-              console.log(1)
-            }
+            uri: "take",
           },
         },
         {
           minor: {
             topic: "评论",
-            method() {
-              console.log(1)
-            }
+            method:info => this.$router.push({
+                name: "evaluate",
+                query: {
+                  info: JSON.stringify(info),
+                },
+              }),
           },
         },
         {
           minor: {
             topic: "删除订单",
-            method() {
-              console.log(1)
-            }
+            uri: "del",
           },
         },
       ],
@@ -167,6 +134,25 @@ export default {
     status_switch(i) {
       this.index = i;
       this.init();
+    },
+    method(value,id,uri,title) {
+      const data = value || {};
+      data.id = data.uni = id;
+      this.$confirm(title||"该操作无法恢复，继续操作吗？", "提示",{
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.$ask({
+          method: "post",
+          url: "order/" + uri,
+          data,
+        }).then(response => {
+          const is = response.status === 200;
+          this.$message[is ? "success":"error"](response.msg);  
+          is && this.init();
+        });
+      }).catch(() => this.$message.info("暂未操作"));
     }
   }
 }
