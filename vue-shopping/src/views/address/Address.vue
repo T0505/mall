@@ -1,20 +1,20 @@
 <template>
   <left-function :index="2">
     <div class="div-address-construct">
-      <div><el-button color="#ff7800" plain>新增收货地址</el-button></div>
+      <div><el-button color="#ff7800" plain @click="$refs.dialog.visible=true;">新增收货地址</el-button></div>
       <div class="flex wrap between">
         <ul class="relative ul-element-frame" v-for="element of group" :key="element.id">
-          <li class="right">
+          <li class="right" @click="$refs.dialog.edit(element)">
             设置为默认地址
             <el-switch v-model="element.isDefault" active-color="#ff7800" :inactive-value="0" :active-value="1"/>
           </li>
           <li>收货人：{{element.realName}}</li>
-          <li>所在地区：{{element.district}}{{element.province}}{{element.city}}</li>
+          <li>所在地区：{{element.district}}{{element.city}}{{element.province}}</li>
           <li>详细地址：{{element.detail}}</li>
           <li>手机号：{{element.phone}}</li>
           <li v-if="element.isDefault" class="absolute li-active-address"/>
           <li class="flex center">
-            <div class="auto pointer">
+            <div class="auto pointer" @click="remove(element.id)">
               <el-icon><Delete /></el-icon>删除
             </div>
             <div class="orange auto pointer  div-modify-icon">
@@ -25,7 +25,7 @@
       </div>
     </div>
   </left-function>
-  <address-dialog title="新增"/>
+  <address-dialog title="新增" ref="dialog"/>
 </template>
 
 <script>
@@ -40,19 +40,24 @@ export default {
   data() {
     return {
       group: [],
-      options: [],
     }
   },
   methods: {
     init() {
-      Promise.all([
-        this.$ask.get("city_list"),
-        this.$ask.get("address/list")
-      ]).then(response => {
-        this.options = response[0].data;
-        this.group = response[1].data;
-      }).catch(error => console.log(error));
+      this.$ask.get("address/list").then(response => this.group = response.data);
     },
+    remove(id) {
+      this.$ask({
+        method: "post",
+        url: "address/del",
+        data: {
+          id,
+        }
+      }).then(response => {
+        this.$message.success(response.msg);
+        this.init();
+      });
+    }
   },
   created() {
     this.init();

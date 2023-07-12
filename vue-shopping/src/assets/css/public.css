@@ -85,6 +85,9 @@ body {
 .wrap {
     flex-wrap: wrap;
 }
+.nowrap {
+    white-space: nowrap;
+}
 
 .column {
     flex-direction: column;

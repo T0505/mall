@@ -26,7 +26,7 @@
 
 <script>
 import LeftFunction from "@/components/common/Left-function.vue";
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 export default {
   name: "Profile",
   components: {
@@ -44,6 +44,12 @@ export default {
       },
     };
   },
+  created() {
+    this.$ask.get("userinfo").then(response => this.$store.commit("setUser",response.data));
+  },
+  methods: {
+    ...mapMutations[{setUser: "setUser"}]
+  }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="div-box-profile area flex between">
     <ul class="relative">
-      <li :class="index===i?'orange':''" class="pointer" v-for="(v,i) of menu" :key="i"
+      <li :class="index===i?'orange':''" class="pointer nowrap" v-for="(v,i) of menu" :key="i"
           @click="$router.push(menu[i].uri)">
         {{v.title}}</li>
       <div :style="{top: 14 + index * 48 + 'px'}" class="div-active-menu absolute"/>
