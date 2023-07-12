@@ -38,7 +38,7 @@
           </div>
           <div>
             <div class="orange">{{status[item.statusDto.type]}}</div>
-            <div class="pointer">订单详情</div>
+            <div class="pointer" @click="$router.push('process')">订单详情</div>
           </div>
           <div>
             <template v-for="(v,i) of events" :key="i">
