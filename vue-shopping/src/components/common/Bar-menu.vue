@@ -1,9 +1,9 @@
 <template>
-  <div v-for="item of array" :key="item.pid">
+  <div v-for="item in array" :key="item.pid">
     <div>{{item.cateName}}</div>
 <!--    <bar-menu v-else :array="item.children"/>-->
     <ul class="ul-child-menu grey flex" v-if="item.children">
-      <li v-for="i of item.children" :key="i.pid" @click="$router.push({
+      <li v-for="i in item.children" :key="i.pid" @click="$router.push({
         name: 'category',
         query: {
           value: JSON.stringify(i),

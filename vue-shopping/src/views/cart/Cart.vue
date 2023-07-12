@@ -1,5 +1,7 @@
 <template>
-  购物车
+<div class="area">
+
+</div>
 </template>
 
 <script>
@@ -9,5 +11,9 @@ export default {
 </script>
 
 <style scoped>
+.area {
+  height: 800px;
+  border: 1px solid black;
+}
 
 </style>
