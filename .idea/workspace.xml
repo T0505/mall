@@ -5,9 +5,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="414155d9-c026-4a36-ad49-8398bb04b7f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/css/public.css" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/assets/css/public.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/category/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-shopping/src/views/category/Category.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/css/public.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/css/public.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/order/Order.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/order/Order.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/process/Process.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/process/Process.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/.vite/deps_temp_0b1f08a5/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/.vite/deps_temp_61c08544/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/css/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/css/public.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/image/img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/image/img_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/image/img_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/image/img_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/loginBg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/assets/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/components/common/Bar-menu.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/components/common/Left-function.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/components/public/Box-footer.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/components/public/Box-header.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/components/public/Goods.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/network/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/Layout.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/address/Address-dialog.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/address/Address.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/cart/Cart.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/category/Category.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/collect/Collect.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/collect/Item.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/detail/Detail.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/index/Index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/login/Login.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/order/Order.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/process/Process.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/profile/Profile.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/views/wallet/Wallet.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/vuex/actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/vuex/getters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/vuex/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/vuex/modules.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/vuex/mutations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/src/vuex/state.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-shopping/vite.config.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,19 +82,19 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/t/history/vue-mall-buy",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/t/history/vue-mall-buy&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/vue-shopping/src/views" />
@@ -62,6 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688786394433</updated>
       <workItem from="1688786395569" duration="5683000" />
+      <workItem from="1689170220312" duration="46000" />
     </task>
     <servers />
   </component>
