@@ -9,8 +9,22 @@
         <li class="bold">订单号：{{ $route.query.id }}</li>
         <li class="auto li-title-padding">
           <h2 :class="!type?'green':'orange'">{{ detail.statusDto.title }}</h2>
-          <div class="pointer" v-if="!type">取消订单</div>
-          <div class="pointer orange" v-if="!type">付款</div>
+          <div class="pointer" v-if="!type" @click="unpaid({
+            url: 'order/cancel',
+            method: 'post',
+            data: {
+              id: $route.query.id,
+            }
+          })">取消订单</div>
+          <div class="pointer orange" v-if="!type" @click="unpaid({
+            url: 'order/pay',
+            method: 'post',
+            data: {
+              from: 'h5',
+              paytype:'yue',
+              uni: $route.query.id,
+            }
+          })">付款</div>
         </li>
       </ul>
       <ul class="align center flex auto ul-right-process">
@@ -19,17 +33,23 @@
           <div class="line">提交订单</div>
           <div class="wrap"> 2022-06-06 10:20:32 </div>
         </li>
-        <li class="li-dot-status">····<span class="bold">·</span>····</li>
+        <li class="li-dot-status green">
+          ····<span class="bold inline realtive" :class="type?'':'span-middle-dot span-one-content'">{{ type?'·': ''}}</span>····
+        </li> 
         <li>
           <div :class="type>=1?'green':''"><el-icon><Select /></el-icon></div>
           <div class="line">付款成功</div>
         </li>
-        <li class="li-dot-status">····<span class="bold">·</span>····</li>
+        <li class="li-dot-status" :class="type >= 1?'green':''"> 
+          ····<span class="bold inline realtive" :class="type === 1?'span-middle-dot span-two-content':''">{{ type=== 1?'': '·'}}</span>····
+        </li> 
         <li>
           <div :class="type>=2?'green':''"><el-icon><ShoppingCart /></el-icon></div>
           <div class="line">等待收货</div>
         </li>
-        <li class="li-dot-status">····<span class="bold">·</span>····</li>
+        <li class="li-dot-status" :class="type >= 2?'green':''">
+          ····<span class="bold inline realtive" :class="type === 2?'span-middle-dot span-three-content':''">{{ type=== 2?'': '·'}}</span>····
+        </li> 
         <li>
           <div :class="type>=3?'green':''"><el-icon><DocumentChecked /></el-icon></div>
           <div class="line">完成</div>
@@ -71,9 +91,9 @@
         <div class="orange bold">¥{{ v.productInfo.price }}</div>
       </li>
       <li class="right li-settlement-foot">
-        <div>商品总价：<span class="orange">¥{{ detail.totalPrice }}</span></div>
+        <div>商品总价：<span class="orange bold">¥{{ detail.totalPrice }}</span></div>
         <div>运费：¥{{ detail.payPostage }}</div>
-        <div>需付款：<span class="orange">¥{{ detail.payPrice }}</span></div>
+        <div>需付款：<span class="orange bold">¥{{ detail.payPrice }}</span></div>
       </li>
     </ul>
   </div>
@@ -97,7 +117,15 @@ export default {
       this.detail = response.data;
       this.info = this.detail.cartInfo;
       this.type = parseInt(this.detail.statusDto.type);
-    })
+    });
+  },
+  methods: {
+    unpaid(request) {
+      this.$ask(request).then(response => {
+        this.$message.success(response.msg);
+        this.$router.push("/");
+      });
+    }
   }
 }
 </script>
@@ -167,5 +195,32 @@ img {
 }
 .li-settlement-foot {
   padding: 0 105px !important;
+}
+.span-middle-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #ff7800;
+  border-radius: 5px;
+  margin: 2px;
+  position: relative;
+  top: 1px;
+}
+.span-one-content::after,
+.span-two-content::after,
+.span-three-content::after{
+  position: absolute;
+  top: -35px;
+  white-space: nowrap;
+  left: -25px;;
+  color: #ff7800;
+}
+.span-one-content::after {
+  content: "等待付款";
+}
+.span-two-content::after {
+  content: "等待发货";
+}
+.span-three-content::after {
+  content: "等待确认";
 }
 </style>

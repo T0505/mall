@@ -120,6 +120,21 @@ export default {
 :deep(.el-dialog__body){
   background-color: #f0f0f0 !important;
 }
+.el-button {
+  padding: 0 40px;
+}
+:deep(.el-cascader) {
+  flex:auto !important;
+}
+.el-input {
+  --el-input-focus-border-color:#ff7800;
+}
+.el-textarea {
+  --el-color-primary:#ff7800;
+}
+.el-cascader {
+  --el-color-primary:#ff7800;
+}
 :deep(.el-checkbox__input.is-checked+.el-checkbox__label) {
   color: #ff7800;
 }
@@ -129,11 +144,5 @@ export default {
 }
 :deep(.el-checkbox__inner):hover {
   border: thin solid #ff7800;
-}
-.el-button {
-  padding: 0 40px;
-}
-:deep(.el-cascader) {
-  flex:auto !important;
 }
 </style>

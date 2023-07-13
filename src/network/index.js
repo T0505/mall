@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios from "axios";
+import { ElMessage } from "element-plus";
 
 const instance = axios.create({
     baseURL: "/api",
@@ -30,6 +31,8 @@ instance.interceptors.response.use(
         if (r.status === 508 || r.status === 512 || r.status === 514) {
             // 登出 清除token缓存
             document.cookie = "";
+            ElMessage.success("登录过期请重新登录")
+            window.location.replace("http://localhost:5174/login");
         }
         return r;
     },

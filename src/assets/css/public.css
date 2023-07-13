@@ -147,3 +147,6 @@ body {
 .green {
     color: #86b166;
 }
+.inline {
+    display: inline-block;
+}

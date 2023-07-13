@@ -14,7 +14,8 @@ const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
-app.config.globalProperties.$url = "http://192.168.157.45:8008/api/";
+
+app.config.globalProperties.$url = "http://172.16.99.87:8008/api/";
 app.config.globalProperties.$ask = axios;
 
 app.use(element);
@@ -22,4 +23,3 @@ app.use(router);
 app.use(vuex);
 
 app.mount("#app");
-//30f07

@@ -10,7 +10,7 @@
           </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click="exit">退出</el-dropdown-item>
             <el-dropdown-item>切换账号</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -52,18 +52,13 @@
     <div class="div-logo flex between">
       <div class="pointer" @click="$router.push('/');"><img src="../../assets/image/img_1.png" alt=""></div>
       <div class="flex relative">
-        <el-input class="input-search absolute"
+        <el-input class="input-search absolute" @keyup.enter="search"
             v-model="value"
             size="large"
             placeholder="请输入搜索商品"
             prefix-icon="Search"
         />
-        <button class="button-search-goods white pointer absolute" @click="$router.push({
-          name: 'category',
-          query: {
-            keyword: value
-          }
-        });">搜索</button>
+        <button class="button-search-goods white pointer absolute" @click="search">搜索</button>
       </div>
     </div>
   </div>
@@ -81,6 +76,21 @@ export default {
   },
   computed: {
     ...mapState({user: "user"}),
+  },
+  methods: {
+    search() {
+      this.$router.push({
+        name: 'category',
+        query: {
+          keyword: this.value
+        },
+      });
+    },
+    exit() {
+      document.cookie ="";
+      this.$store.commit("setUser",{});
+      window.location.replace("http://localhost:5174/login");
+    }
   },
 }
 </script>
@@ -122,5 +132,8 @@ export default {
 }
 .ul-header-select>li {
   margin-left: 30px;
+}
+.el-input {
+  --el-input-focus-border-color:#ff7800;
 }
 </style>

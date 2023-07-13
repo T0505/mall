@@ -46,7 +46,7 @@
       <li class="li-bottom-function flex">
         <el-button color="#ff7800" plain @click="cart">加入购物车</el-button>
         <el-button color="#ff7800">购物</el-button>
-        <div class="div-collect center" :style="goods.storeInfo.userCollect?{
+        <div class="div-collect center" @click="addCollect" :style="goods.storeInfo.userCollect?{
             backgroundColor: '#ff7800',
             border: 'none',
             color: 'white',
@@ -215,11 +215,23 @@ export default {
       this.$ask({
         method: "post",
         url: "cart/add",
-        data: data,
+        data,
       }).then(response => {
-        this.$message.success(response.msg)
-
+        this.$message.success(response.msg);
       }).catch(error => console.log(error));
+    },
+    addCollect() {
+      this.$ask({
+        url: "collect/add",
+        method: "post",
+        data: {
+          type: "collect",
+          id: this.$route.query.id,
+        },
+      }).then(response => {
+        this.goods.storeInfo.userCollect = !this.goods.storeInfo.userCollect;
+        this.$message.success(response.msg);
+      })
     }
   },
   watch: {

@@ -3,8 +3,11 @@
     <div class="div-profile-modify">
       <el-form :model="value" label-width="100px" label-position="left">
         <el-form-item label="昵称：">{{ user.nickname }}</el-form-item>
-        <el-form-item label="手机号：">{{ user.phone }}
-          <span class="span-update-phone orange">修改</span>
+        <el-form-item label="手机号：">
+          <span  v-show="status" >{{ user.phone }}</span>
+          <el-input ref="phone" maxlength="11" clearable v-show="!status" v-model="user.phone"/> 
+          <span class="span-update-phone orange pointer" v-if="status" @click="updatePhone(false)">修改</span>
+          <span class="span-update-phone orange pointer" v-else @click="updatePhone">保存</span>
         </el-form-item>
         <el-form-item label="账户余额：">¥{{ user.nowMoney }}</el-form-item>
         <el-form-item label="原密码：">
@@ -17,7 +20,7 @@
           <el-input v-model="value.re_password" clearable :show-password="true" placeholder="请输入重复新密码"/>
         </el-form-item>
         <el-form-item>
-          <el-button color="#ff7800" plain>确认修改</el-button>
+          <el-button color="#ff7800" plain @click="midify">确认修改</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -38,17 +41,51 @@ export default {
   data() {
     return {
       value: {
-        origin: undefined,
-        password: undefined,
-        re_password: undefined
+        origin: "",
+        password: "",
+        re_password: ""
       },
+      status: true,
     };
   },
   created() {
     this.$ask.get("userinfo").then(response => this.$store.commit("setUser",response.data));
   },
   methods: {
-    ...mapMutations[{setUser: "setUser"}]
+    ...mapMutations[{setUser: "setUser"}],
+    midify() {
+      if(this.value.origin.length < 6 || this.value.origin.length > 18 && this.value.password.length < 6 || this.value.password.length  > 18) {
+        this.$message.warning("密码长度必须在 6-18 之间");
+      } else if(this.value.password !== this.value.re_password) {
+        this.$message.warning("两次密码不一致")
+      } else {
+        this.$ask({
+          url: "/user/password",
+          method: "post",
+          data: {
+            newPassword: this.value.password,
+            password: this.origin.password,
+          },
+        }).then(response => console.log(response.msg));
+      }
+    },
+    updatePhone(bool) {
+      if(bool) {
+        this.$ask({
+          url: "user/edit",
+          method: "post",
+          data: {
+            phone: this.user.phone,
+          },
+        }).then(response => {
+          this.$message.success(response.msg);
+          this.status = true;
+        });
+      } else {
+        this.status = false;
+        this.$refs.phone.focus();
+      }
+    }
   }
 }
 </script>
@@ -65,4 +102,8 @@ export default {
 .el-input {
   width: 240px;
 }
+.el-input {
+  --el-input-focus-border-color:#ff7800;
+}
+
 </style>

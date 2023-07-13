@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       active: 0,
-      value: this.$route.query.value && JSON.parse(this.$route.query.value),
+      value: undefined,
       limit: 12,
       page: 1,
       total: 1,
@@ -51,6 +51,7 @@ export default {
   },
   methods: {
     init(order) {
+      this.value = this.$route.query.value && JSON.parse(this.$route.query.value)
       const key = this.$route.query.keyword;
       const sort = !order ? undefined : order===1?"asc":"desc", params = {
         limit: this.limit,

@@ -20,7 +20,7 @@
         <div class="flex center div-content-format">
           <div class="div-goods-img">
             <ul v-for="i of item.cartInfo" :key="i.id" class="flex ul-goods-content">
-              <li class="flex auto">
+              <li class="flex">
                 <div><img width="86" :src="$url+i.productInfo.image" alt=""></div>
                 <div class="flex column between left">
                   <div>{{i.productInfo.storeName}}</div>
@@ -165,7 +165,7 @@ export default {
 
 <style scoped>
 img {
-  margin-right: 10px;
+  margin: 0 10px;
 }
 .ul-status-switch {
   line-height: 42px;
@@ -195,11 +195,11 @@ img {
   align-self:center;
 }
 .ul-goods-content>li {
-  flex: 15%;
+  flex: 18%;
   align-self:center;
 }
 .ul-goods-content>li:first-of-type {
-  justify-content: center;
+  flex: 45%;
 }
 .ul-goods-content {
   padding: 15px 0;
